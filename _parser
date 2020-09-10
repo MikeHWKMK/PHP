@@ -1,1 +1,32 @@
-
+<?php
+    const TOKEN ='*********************************';
+    const BASE_URL='https://api.telegram.org/bot'.TOKEN.'/';
+    $update = json_decode(file_get_contents('php://input'), JSON_OBJECT_AS_ARRAY);
+    function sendRequest ($method,$params=[])
+      {
+        if (!empty($params)) {
+        $url =BASE_URL.$method.'?'.http_build_query($params);
+      } else {
+     $url =BASE_URL.$method;  
+    }
+      return  json_decode (file_get_contents($url), JSON_OBJECT_AS_ARRAY);
+    }
+  $time  = 'Что такое конструктор?  
+Это когда нам нужно при создании объекта класса сразу передать значения методу и свойству.
+Пример:
+    class A
+    {
+        public $a;
+        public $b;
+        
+        public function __construct()
+        {
+            echo $f + $e; // найдем сумму параметров
+        }
+    }
+    
+    $obj_A = new A(1, 2); // выведет 3, причем обязательно необходимо, чтобы мы сразу дали значения в конструктор. Метод конструктор выполняется сразу при создании объекта.';
+  $chat_id =$update['message']['chat']['id'];
+  sendRequest('sendMessage',  ['chat_id'=> $chat_id,  'text' => $time ]);
+ 
+ ?>
